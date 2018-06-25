@@ -6,7 +6,9 @@
         <title>Emoji Clicker</title>
     </head>
     <body>
+        <img id="dabpenguinimg" src="dabpenguin.png" width="256" height="256">
         <canvas id="memeCanvas" width="1000" height="1000" style="border:1px solid #00c9ff;">
+        <p><button onclick="makeimageappear()">Poggers</button></p>
         <script>
         var c = document.getElementById("memeCanvas");
         var ctx = c.getContext("2d");
@@ -24,6 +26,13 @@
         ctx.beginPath();
         ctx.arc(500,260,80,0,4*Math.PI);
         ctx.stroke();
+
+        function makeimageappear(){
+            var c = document.getElementById("memeCanvas");
+            var ctx = c.getContext("2d");
+            var dabpenguinimg = document.getElementById("dabpenguinimg");
+            ctx.drawImage(dabpenguinimg,150,400)
+        }
 
         </script>
         <h1 id="title">Emoji Clicker</h1>
