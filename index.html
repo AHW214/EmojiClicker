@@ -6,7 +6,7 @@
         <title>Emoji Clicker</title>
     </head>
     <body>
-        <canvas id="memeCanvas" width="400" height="100" style="border:1px solid #00c9ff;">
+        <canvas id="memeCanvas" width="1000" height="1000" style="border:1px solid #00c9ff;">
         <script>
         var c = document.getElementById("memeCanvas");
         var ctx = c.getContext("2d");
@@ -15,6 +15,16 @@
         grd.addColorStop(1,"white");
         ctx.fillStyle = grd;
         ctx.fillRect(10,10,400,80);
+
+        var c =document.getElementById("memeCanvas");
+        var ctx = c.getContext("2d");
+        ctx.beginPath();
+        ctx.arc(500,100,80,0,4*Math.PI);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(500,260,80,0,4*Math.PI);
+        ctx.stroke();
+
         </script>
         <h1 id="title">Emoji Clicker</h1>
         <audio controls>
