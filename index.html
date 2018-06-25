@@ -6,6 +6,16 @@
         <title>Emoji Clicker</title>
     </head>
     <body>
+        <canvas id="myCanvas" width="200" height="100" style="border:1px solid #00c9ff;">
+        <script>
+        var c = document.getElementById("memeCanvas");
+        var ctx = c.getContext("2d");
+        var grd = ctx.createLinearGradient(0,0,200,0);
+        grd.addColorStop(0,"blue");
+        grd.addColorStop(1,"white");
+        ctx.fillStyle = grd;
+        ctx.fillRect(10,10,150,80);
+        </script>
         <h1 id="title">Emoji Clicker</h1>
         <audio controls>
             <source src="Danny McCarthy - Silver Scrapes.mp3" type="audio/mpeg">
