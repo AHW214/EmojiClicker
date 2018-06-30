@@ -1,3 +1,5 @@
+var imageOn = false;
+
 var canvas = document.createElement("canvas");
 canvas.classList.add("memeCanvas");
 canvas.width = 1000;
@@ -18,9 +20,14 @@ ctx.beginPath();
 ctx.arc(500,260,80,0,2*Math.PI);
 ctx.stroke();
 
-window.addEventListener("load", () => document.body.insertBefore(canvas, document.getElementById("penguin")));
+var button;
+window.addEventListener("load", () => {
+    button = document.getElementById("penguin");
+    button.addEventListener("click", () => imageOn ? ctx.clearRect(0, 0, canvas.width, canvas.height) : imageAppear(350, 350, 256, 256, "images/dabpenguin.png"));
+    document.body.insertBefore(canvas, button)
+});
 
-function imageAppear(x, y, w, h, src){
+function imageAppear(x, y, w, h, src) {
     let image = new Image(w, h);
     image.addEventListener("load", function() { ctx.drawImage(this, x, y) });
     image.src = src;
