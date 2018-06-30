@@ -20,24 +20,18 @@ ctx.beginPath();
 ctx.arc(500,260,80,0,2*Math.PI);
 ctx.stroke();
 
-var button;
-window.addEventListener("load", () => {
-    button = document.getElementById("penguin");
-    button.addEventListener("click", () => {
-        if(imageOn) {
-            imageOn = false;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-        }
-        else {
-            imageOn = true;
-            imageAppear(350, 350, 256, 256, "images/dabpenguin.png");
-        }
-    });
-    document.body.insertBefore(canvas, button)
-});
+window.addEventListener("load", () => document.body.insertBefore(canvas, document.getElementById("penguin")));
 
-function imageAppear(x, y, w, h, src) {
-    let image = new Image(w, h);
-    image.addEventListener("load", function() { ctx.drawImage(this, x, y) });
-    image.src = src;
+function imageHandler(x, y, w, h, src) {
+    if(imageOn) {
+        imageOn = false;
+        ctx.clearRect(x, y, w, h);
+    }
+    else {
+        imageOn = true;
+
+        let image = new Image(w, h);
+        image.addEventListener("load", function() { ctx.drawImage(this, x, y) });
+        image.src = src;
+    }
 }
