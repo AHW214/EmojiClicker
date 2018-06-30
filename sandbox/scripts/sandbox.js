@@ -23,7 +23,16 @@ ctx.stroke();
 var button;
 window.addEventListener("load", () => {
     button = document.getElementById("penguin");
-    button.addEventListener("click", () => imageOn ? ctx.clearRect(0, 0, canvas.width, canvas.height) : imageAppear(350, 350, 256, 256, "images/dabpenguin.png"));
+    button.addEventListener("click", () => {
+        if(imageOn) {
+            imageOn = false;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+        else {
+            imageOn = true;
+            imageAppear(350, 350, 256, 256, "images/dabpenguin.png");
+        }
+    });
     document.body.insertBefore(canvas, button)
 });
 
