@@ -2,6 +2,8 @@ class Game
 {
     constructor(w, h) 
     {
+        /* Canvas Setup */
+
         this.wrapper = document.getElementById("wrapper");
         this.canvas = document.getElementById("mainCanvas");
         
@@ -13,6 +15,10 @@ class Game
 
         this.canvasBounds = this.canvas.getBoundingClientRect();
 
+        this.ctx = this.canvas.getContext("2d");
+
+        /* Mouse Data */
+
         this.mouse = {
             x: 0, y: 0
             //lastX: 0, lastY: 0,
@@ -20,11 +26,66 @@ class Game
             //buttonNames: ["b1", "b2", "b3"]
         }
 
-        this.ctx = this.canvas.getContext("2d");
+        /* Time Keeping */
+
+        this.deltaTime = null;
+
+        /* Particles */
+
+        this.physics = {
+            gravity: 9.81
+        }
+
+        this.particles = [];
+
+        /* Scoring */
 
         this.scoreBoard = document.getElementById("scoreBoard");
         this.counter = 0;
+
+        /* Start Time Loop */
+
+        this.startTime();
     }
+
+    /* Time Loop */
+
+    startTime()
+    {
+        let prevTime = +new Date();
+
+        const step = (nowTime) => {
+            this.deltaTime = nowTime - prevTime;
+            prevTime = nowTime;
+
+            this.update();
+
+            requestAnimationFrame(step);
+        }
+
+        step(prevTime);
+    }
+
+    /* Update Runs Once Per Frame */
+
+    update()
+    {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        this.particles.forEach((p, i) => {
+            console.log(i);
+            //this.ctx.drawImage(p.image, p.x, p.y);
+
+            this.ctx.fillRect(p.x, p.y, p.w, p.h);   
+            
+            p.vy += this.deltaTime * this.physics.gravity / 10000;
+            
+            p.x += this.deltaTime * p.vx;
+            p.y += this.deltaTime * p.vy;
+        });
+    }
+
+    /* Drawing to the Canvas */
 
     drawEmoji(x, y, w, h, src, func)
     {
@@ -42,6 +103,16 @@ class Game
         image.src = src;
     }
 
+    /* Spawn Particles */
+
+    spawnParticle(x, y, w, h, src, vx = 0.0, vy = 0.0)
+    {
+        let particle = new Particle(...arguments);
+        this.particles.push(particle);
+    }
+
+    /* Get Mouse Position on Click */
+
     mouseEvent(event)
     {
         let rawX = event.clientX - this.canvasBounds.left;
@@ -50,6 +121,8 @@ class Game
         this.mouse.x = (rawX * this.canvas.width) / this.canvasBounds.width;
         this.mouse.y = (rawY * this.canvas.height) / this.canvasBounds.height;
     }
+
+    /* Generate a Hitbox DIV */
 
     createHitbox(x, y, w, h, func)
     {
@@ -72,9 +145,51 @@ class Game
         this.wrapper.appendChild(hb);
     }
 
-    incrementScore()
+    /* Scoring */
+
+    get score() { return this.counter; }
+
+    set score(value)
     {
-        this.scoreBoard.innerHTML = ++this.counter;
+        this.counter = value;
+        this.scoreBoard.innerHTML = this.counter;
+    }
+}
+
+class Particle
+{
+    constructor(x, y, w, h, src, vx = 0.0, vy = 0.0)
+    {
+        this.image = new Image(w, h);
+        this.image.src = src;
+
+        this._x = x;
+        this._y = y;
+
+        this.w = w;
+        this.h = h;
+
+        this.vx = vx;
+        this.vy = vy;
+
+        this.prevX = this._x;
+        this.prevY = this._y;
+    }
+
+    get x() { return this._x; }
+
+    set x(value)
+    {
+        this.prevX = this._x;
+        this._x = value;
+    }
+
+    get y() { return this._y; }
+
+    set y(value)
+    {
+        this.prevY = this._y;
+        this._y = value;
     }
 }
 
@@ -84,6 +199,13 @@ function run()
     var game = new Game(500, 500);
     game.drawEmoji(350, 350, 128, 128, "src/images/emoji/moon.png", (x, y) => {
         console.log("x pos: " + x + "\ny pos: " + y);
-        game.ctx.fillRect(x, y, 50, 50);
+        game.score++;
+
+        game.spawnParticle(x, y, 25, 25, "src/images/emoji/cheese.png", -0.5, -0.5);
+    });
+
+    var loss = document.getElementById("losedoshbutton");
+    loss.addEventListener("click", () => {
+        game.counter -= 10;
     });
 }
