@@ -85,5 +85,13 @@ function run()
     game.drawEmoji(350, 350, 128, 128, "src/images/emoji/moon.png", (x, y) => {
         console.log("x pos: " + x + "\ny pos: " + y);
         game.ctx.fillRect(x, y, 50, 50);
+        game.incrementScore();
     });
+
+    var losedoshbutton = document.getElementById("losedoshbutton").addEventListener("click",function(){
+    console.log(game.counter);
+    game.counter -= 10;
+    game.scoreBoard.innerHTML = game.counter;
+    })       
+
 }
