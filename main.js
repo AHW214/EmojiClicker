@@ -206,6 +206,6 @@ function run()
 
     var loss = document.getElementById("losedoshbutton");
     loss.addEventListener("click", () => {
-        game.counter -= 10;
+        game.score -= 10;
     });
 }
