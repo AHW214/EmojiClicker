@@ -199,6 +199,7 @@ function run()
     var game = new Game(500, 500);
     game.drawEmoji(350, 350, 128, 128, "src/images/emoji/moon.png", (x, y) => {
         console.log("x pos: " + x + "\ny pos: " + y);
+<<<<<<< HEAD
         game.score++;
 
         game.spawnParticle(x, y, 25, 25, "src/images/emoji/cheese.png", -0.5, -0.5);
@@ -207,5 +208,16 @@ function run()
     var loss = document.getElementById("losedoshbutton");
     loss.addEventListener("click", () => {
         game.counter -= 10;
+=======
+        game.ctx.fillRect(x, y, 50, 50);
+        game.incrementScore();
+>>>>>>> b9897ee3a8b1581457815e3f75e49275dc564ec3
     });
+
+    var losedoshbutton = document.getElementById("losedoshbutton").addEventListener("click",function(){
+    console.log(game.counter);
+    game.counter -= 10;
+    game.scoreBoard.innerHTML = game.counter;
+    })       
+
 }
