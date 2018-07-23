@@ -101,8 +101,27 @@ class Game
         let dP = Vector2.scale(this.deltaTime, physObj.velocity);
         physObj.position = Vector2.sum(dP, physObj.position);
 
-        console.log(physObj.position);
-        console.log(physObj.velocity);
+        //console.log(physObj.position);
+        //console.log(physObj.velocity);
+    }
+
+    /* Check if Object out of Bounds */
+
+    onScreen(obj)
+    {
+        let rawLeft = this.canvasBounds.left - obj.scale.x;
+        let rawRight = this.canvasBounds.right;
+
+        let rawTop = this.canvasBounds.top; 
+        let rawBottom = this.canvasBounds.bottom + obj.scale.y;
+
+        let left = (rawLeft * this.canvas.width) / this.canvasBounds.width; //make function for scaling to canvas dimensions
+        let right = (rawRight * this.canvas.width) / this.canvasBounds.width; //do we need to scale??
+
+        let top = (rawTop * this.canvas.height) / this.canvasBounds.height;
+        let bottom = (rawBottom * this.canvas.height) / this.canvasBounds.height;
+
+        return (obj.position.x > left && obj.position.x < right) && (obj.position.y > top && obj.position.y < bottom); //fix top/bottom bounds
     }
 
     /* Draw an Object */
@@ -120,7 +139,15 @@ class Game
         this.objects.physicsObjects.forEach(this.enactPhysics.bind(this));
         
         for(let k in this.objects)
-            this.objects[k].forEach(this.draw.bind(this));
+            this.objects[k].forEach((obj, i) => {
+                if(this.onScreen(obj))
+                    this.draw(obj);                 
+                else {   
+                    this.objects[k].splice(i, 1);
+                    console.log("delet");
+                    console.log(this.objects[k]);
+                }
+            });
     }
     
     /* Drawing to the Canvas */
@@ -161,10 +188,10 @@ class Game
 
     /* Spawn Particles */
 
-    async makeParticle(src, w, h, x, y, vx = 0.0, vy = 0.0)
+    async makeParticle(src, w, h, x, y, maxX = 0.0, maxY = 0.0)
     {
         let particle = await GameObject.instantiate(src, w, h, x, y, Particle);
-        particle.velocity = new Vector2(vx, vy);
+        Particle.launch(particle, maxX, maxY);
         this.objects.physicsObjects.push(particle);
     }
 
