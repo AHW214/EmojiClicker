@@ -2,11 +2,8 @@ class GameObject
 {
     constructor(image, x, y)
     {
-        this.image = image;
-        
-        this.width = image.width;
-        this.height = image.height;
-
+        this.image = image;        
+        this.scale = new Vector2(image.width, image.height);
         this.position = new Vector2(x, y);
     }
 
