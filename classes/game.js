@@ -73,7 +73,6 @@ class Game
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.particles.forEach((p, i) => {
-            console.log(i);
             //this.ctx.drawImage(p.image, p.x, p.y);
 
             this.ctx.fillRect(p.x, p.y, p.w, p.h);   
