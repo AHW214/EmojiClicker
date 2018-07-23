@@ -7,7 +7,7 @@ class Vector2
     }
 
     get magnitude() { return Math.sqrt(this.x**2 + this.y**2); }
-    get inverse() { return this.scale(-1, this); }
+    get inverse() { return Vector2.scale(-1, this); }
 
     static get zero() { return new Vector2(0.0, 0.0); }
     static get right() { return new Vector2(1.0, 0.0); }

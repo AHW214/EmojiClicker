@@ -35,7 +35,7 @@ class Game
         /* Particles */
 
         this.physics = {
-            gravity: new Vector2(0.0 -9.81)
+            gravity: new Vector2(0.0, 9.81 / 1e4) //fix
         }
 
         this.objects = {
@@ -95,11 +95,14 @@ class Game
     {
         if(!physObj.ignoreGravity) {
             let dV = Vector2.scale(this.deltaTime, this.physics.gravity);
-            physObj.velocity = Vector2.add(dV, physObj.velocity);
+            physObj.velocity = Vector2.sum(dV, physObj.velocity);
         }
 
         let dP = Vector2.scale(this.deltaTime, physObj.velocity);
-        physObj.position = Vector2.add(dP, physObj.position);
+        physObj.position = Vector2.sum(dP, physObj.position);
+
+        console.log(physObj.position);
+        console.log(physObj.velocity);
     }
 
     /* Draw an Object */
@@ -107,16 +110,17 @@ class Game
     draw(obj)
     {
         this.ctx.drawImage(obj.image, obj.position.x, obj.position.y, obj.scale.x, obj.scale.y);
+        //this.ctx.fillRect(obj.position.x, obj.position.y, obj.scale.x, obj.scale.y);
     }
 
     /* Update Physics and Render All Objects */
 
     render()
     {
-        this.objects.physicsObjects.forEach(this.enactPhysics);
+        this.objects.physicsObjects.forEach(this.enactPhysics.bind(this));
         
         for(let k in this.objects)
-            this.objects[k].forEach(this.draw);
+            this.objects[k].forEach(this.draw.bind(this));
     }
     
     /* Drawing to the Canvas */
@@ -161,7 +165,7 @@ class Game
     {
         let particle = await GameObject.instantiate(src, w, h, x, y, Particle);
         particle.velocity = new Vector2(vx, vy);
-        this.particles.push(particle);
+        this.objects.physicsObjects.push(particle);
     }
 
     /* Get Mouse Position on Click */
