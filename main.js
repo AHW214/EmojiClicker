@@ -13,7 +13,6 @@ function run()
     var sickwubs = document.getElementById("sickwubs");
     var firstUpgrade = false;
 
-
     var loss = document.getElementById("upgradememes");
     loss.addEventListener("click", () => {
         if(game.score >= 20) {

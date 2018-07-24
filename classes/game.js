@@ -109,19 +109,13 @@ class Game
 
     onScreen(obj)
     {
-        let rawLeft = this.canvasBounds.left - obj.scale.x;
-        let rawRight = this.canvasBounds.right;
+        let left = 0.0 - obj.scale.x;
+        let right = this.canvas.width;
 
-        let rawTop = this.canvasBounds.top; 
-        let rawBottom = this.canvasBounds.bottom + obj.scale.y;
+        let top = 0.0 - obj.scale.y;
+        let bottom = this.canvas.height;
 
-        let left = (rawLeft * this.canvas.width) / this.canvasBounds.width; //make function for scaling to canvas dimensions
-        let right = (rawRight * this.canvas.width) / this.canvasBounds.width; //do we need to scale??
-
-        let top = (rawTop * this.canvas.height) / this.canvasBounds.height;
-        let bottom = (rawBottom * this.canvas.height) / this.canvasBounds.height;
-
-        return (obj.position.x > left && obj.position.x < right) && (obj.position.y > top && obj.position.y < bottom); //fix top/bottom bounds
+        return (obj.position.x > left && obj.position.x < right) && (obj.position.y > top && obj.position.y < bottom);
     }
 
     /* Draw an Object */
