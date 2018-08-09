@@ -1,8 +1,8 @@
 class PhysicsObject extends GameObject
 {
-    constructor(image, x, y)
+    constructor(image, pos)
     {
-        super(image, x, y);
+        super(image, pos);
 
         this.velocity = Vector2.zero;
         this.ignoreGravity = false;

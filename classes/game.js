@@ -19,12 +19,7 @@ class Game
 
         /* Mouse Data */
 
-        this.mouse = {
-            position: Vector2.zero
-            //lastX: 0, lastY: 0,
-            //b1: false, b2: false, b3: false,
-            //buttonNames: ["b1", "b2", "b3"]
-        }
+        this.mouse = { position: Vector2.zero }
 
         /* Time Keeping */
 
@@ -100,9 +95,6 @@ class Game
 
         let dP = Vector2.scale(this.deltaTime, physObj.velocity);
         physObj.position = Vector2.sum(dP, physObj.position);
-
-        //console.log(physObj.position);
-        //console.log(physObj.velocity);
     }
 
     /* Check if Object out of Bounds */
@@ -123,7 +115,6 @@ class Game
     draw(obj)
     {
         this.ctx.drawImage(obj.image, obj.position.x, obj.position.y, obj.scale.x, obj.scale.y);
-        //this.ctx.fillRect(obj.position.x, obj.position.y, obj.scale.x, obj.scale.y);
     }
 
     /* Update Physics and Render All Objects */
@@ -146,18 +137,12 @@ class Game
     
     /* Drawing to the Canvas */
 
-    /*
-    drawEmoji(x, y, w, h, src, func)
-    {
-        this.drawElem(x, y, w, h, src);
-        this.createHitbox(x, y, w, h, func);
-    }
-    */
-
     async makeEmoji(src, w, h, x, y, func)
     {
         let emoji = await this.makeObject(src, w, h, x, y);
         this.createHitbox(emoji, func);
+
+        return emoji;
     }
 
     async makeObject(src, w, h, x, y)
@@ -168,23 +153,11 @@ class Game
         return obj;
     }
 
-    /*
-    drawElem(x, y, w, h, src)
-    {
-        let image = new Image(w, h);
-        image.addEventListener("load", () => {
-            this.ctx.drawImage(image, x, y, w, h);
-        });
-        
-        image.src = src;
-    }
-    */
-
     /* Spawn Particles */
 
     async makeParticle(src, w, h, x, y, maxX = 0.0, maxY = 0.0)
     {
-        let particle = await GameObject.instantiate(src, w, h, x, y, Particle);
+        let particle = await GameObject.instantiate(src, w, h, x, y, Particle, true);
         Particle.launch(particle, maxX, maxY);
         this.objects.physicsObjects.push(particle);
     }
@@ -207,7 +180,7 @@ class Game
     createHitbox(obj, func)
     {
         let hb = document.createElement("div");
-        //hb.id = "test";
+
         hb.style.width = obj.scale.x + "px";
         hb.style.height = obj.scale.y + "px";
 

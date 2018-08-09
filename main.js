@@ -1,7 +1,7 @@
-function run() 
+async function run() 
 {
     var game = new Game(500, 500);
-    game.makeEmoji("src/images/emoji/moon.png", 256, 256, 128, 128, (pos) => {
+    let firstEmoji = await game.makeEmoji("src/images/emoji/moon.png", 256, 256, 128, 128, (pos) => {
         console.log(`x pos: ${pos.x}\ny pos: ${pos.y}`); 
         console.log(firstUpgrade);
 
@@ -15,13 +15,28 @@ function run()
 
     var loss = document.getElementById("upgradememes");
     loss.addEventListener("click", () => {
-        if(game.score >= 20) {
-            game.score -= 20;
-            firstUpgrade = true
-            sickwubs.play();
-            document.body.removeChild(loss);
-        } else {
+        if(game.score < 20) {
             console.log("you dont got the dosh");
+            return;
+        }
+
+        game.score -= 20;
+        firstUpgrade = true;
+        sickwubs.play();
+
+        document.body.removeChild(loss);
+    });
+
+    var evolve = document.getElementById("evolvebutton");
+    evolve.addEventListener("click", () => {
+        if(game.score < 50) {
+            console.log("cease and desist");
+            return;
         } 
+
+        game.score -= 50;
+        firstEmoji.image.src = "src/images/emoji/sun.png";
+
+        document.body.removeChild(evolve);
     });
 }

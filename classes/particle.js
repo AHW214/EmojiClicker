@@ -1,8 +1,8 @@
 class Particle extends PhysicsObject
 {
-    constructor(image, x, y)
+    constructor(image, pos)
     {
-        super(image, x, y);
+        super(image, pos);
     }
 
     static launch(particle, maxX, maxY)
