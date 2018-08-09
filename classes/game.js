@@ -200,6 +200,8 @@ class Game
 
         hb.style.borderRadius = Math.round(Math.max(obj.scale.x, obj.scale.y) / 2) + "px";
 
+        hb.style.pointerEvents = "auto";
+
         hb.addEventListener("click", (event) => {
             this.mouseEvent(event);
             func(this.mouse.position);
