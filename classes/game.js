@@ -1,10 +1,10 @@
 class Game
 {
-    constructor(w, h) 
+    constructor(w, h)
     {
         /* Canvas Setup */
 
-        this.wrapper = document.getElementById("wrapper");
+        this.wrapper = document.getElementById("wrapper"); //kendrick lamar haha
         this.canvas = document.getElementById("mainCanvas");
         
         this.canvas.width = w;

@@ -1,17 +1,31 @@
 async function run() 
 {
-    var game = new Game(500, 500);
+    var game = new Game(window.innerWidth, window.innerHeight);
+    window.addEventListener("resize", () => {
+        game.canvas.width = window.innerWidth;
+        game.canvas.height = window.innerHeight;
+    });
+
+    let particleimage = "src/images/emoji/cheese.png";
+
     let firstEmoji = await game.makeEmoji("src/images/emoji/moon.png", 256, 256, 128, 128, (pos) => {
         console.log(`x pos: ${pos.x}\ny pos: ${pos.y}`); 
         console.log(firstUpgrade);
+        
+        if (secondUpgrade)
+            game.score += 5;
+        else if (firstUpgrade)
+            game.score += 2;
+        else 
+            game.score += 1;
 
-        game.score += firstUpgrade ? 2 : 1;
+        game.makeParticle(particleimage, 64, 64, pos.x, pos.y, 0.5, -0.5);
 
-        game.makeParticle("src/images/emoji/cheese.png", 64, 64, pos.x, pos.y, 0.5, -0.5);
     });
     
     var sickwubs = document.getElementById("sickwubs");
     var firstUpgrade = false;
+    var secondUpgrade = false;
 
     var loss = document.getElementById("upgradememes");
     loss.addEventListener("click", () => {
@@ -36,7 +50,8 @@ async function run()
 
         game.score -= 50;
         firstEmoji.image.src = "src/images/emoji/sun.png";
-
+        particleimage = "src/images/emoji/alien.png";
+        secondUpgrade = true;
         document.body.removeChild(evolve);
     });
 }
