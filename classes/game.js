@@ -97,15 +97,25 @@ class Game
         physObj.position = Vector2.sum(dP, physObj.position);
     }
 
-    /* Check if Object out of Bounds */
+    /* Check if Object Is out of Bounds */
 
     onScreen(obj)
     {
-        let left = 0.0 - obj.scale.x;
-        let right = this.canvas.width;
+        let left, right, top, bottom; // maybe make this an instance method of physicsobject (so only have to check condition once)
+        if(obj.centered) {
+            left = 0.0 - obj.scale.x / 2.0;
+            right = this.canvas.width + obj.scale.x / 2.0;
 
-        let top = 0.0 - obj.scale.y;
-        let bottom = this.canvas.height;
+            top = 0.0 - obj.scale.y / 2.0;
+            bottom = this.canvas.height + obj.scale.y / 2.0;
+        }
+        else {
+            left = 0.0 - obj.scale.x;
+            right = this.canvas.width;
+
+            top = 0.0 - obj.scale.y;
+            bottom = this.canvas.height;
+        }
 
         return (obj.position.x > left && obj.position.x < right) && (obj.position.y > top && obj.position.y < bottom);
     }
