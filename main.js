@@ -1,20 +1,16 @@
 async function run() 
 {
-    var game = new Game(window.innerWidth, window.innerHeight);
-    window.addEventListener("resize", () => {
-        game.canvas.width = window.innerWidth;
-        game.canvas.height = window.innerHeight;
-    });
+    var game = new Game();
 
     let particleimage = "src/images/emoji/cheese.png";
 
-    let firstEmoji = await game.makeEmoji("src/images/emoji/moon.png", 256, 256, 128, 128, (pos) => {
+    let firstEmoji = await game.makeEmoji("src/images/emoji/moon.png", 256, 256, 512, 512, (pos) => {
         console.log(`x pos: ${pos.x}\ny pos: ${pos.y}`); 
         console.log(firstUpgrade);
         
-        if (secondUpgrade)
+        if(secondUpgrade)
             game.score += 5;
-        else if (firstUpgrade)
+        else if(firstUpgrade)
             game.score += 2;
         else 
             game.score += 1;

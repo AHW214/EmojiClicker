@@ -1,20 +1,21 @@
+* {
+	user-select: none;	
+}
+
 body {
 	overflow: hidden;
 	background-image: url("https://wallpaper.wiki/wp-content/uploads/2017/04/wallpaper.wiki-Cool-postcard-background-desktop-design-media-PIC-WPD0010509.jpg");
-	background-color:#031a78;
-}
-
-canvas {
-
+	background-color: black;
 }
 
 #score {
-	color:white;	
+	color:white;
 }
 
 #wrapper {
 	position: absolute;
 	top: 0px;
+	left: 0px;
 	width: 100vw;
 	height: 100vh;
 	pointer-events: none;
