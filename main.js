@@ -3,8 +3,12 @@ async function run()
     var game = new Game();
 
     let particleimage = "src/images/emoji/cheese.png";
+    
+    let screenSize = Helpers.screenDimensions;
+    let emojiSize = new Vector2(256, 256);
+    let emojiPos = Vector2.diff(Vector2.scale(0.5, screenSize), Vector2.scale(0.5, emojiSize));
 
-    let firstEmoji = await game.makeEmoji("src/images/emoji/moon.png", 256, 256, 512, 512, (pos) => {
+    let firstEmoji = await game.makeEmoji("src/images/emoji/moon.png", emojiSize.x, emojiSize.y, emojiPos.x, emojiPos.y, (pos) => {
         console.log(`x pos: ${pos.x}\ny pos: ${pos.y}`); 
         console.log(firstUpgrade);
         
