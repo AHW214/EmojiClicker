@@ -8,6 +8,18 @@ canvas {
 
 }
 
+#evolvebutton {
+	color:black;
+	text-decoration: none;
+	border-radius: 25px;
+}
+
+#upgradememes {
+	color:black;
+	text-decoration: none;
+	border-radius: 25px;
+}
+
 #score {
 	color:white;	
 }
