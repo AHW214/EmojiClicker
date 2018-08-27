@@ -1,19 +1,14 @@
 class Game
 {
-    constructor(w, h)
+    constructor()
     {
         /* Canvas Setup */
 
-        this.wrapper = document.getElementById("wrapper"); //kendrick lamar haha
+        this.wrapper = document.getElementById("wrapper");
         this.canvas = document.getElementById("mainCanvas");
-        
-        this.canvas.width = w;
-        this.canvas.height = h;
-        
-        this.canvas.style.width = "100%";
-        this.canvas.style.height = "100%";
 
-        this.canvasBounds = this.canvas.getBoundingClientRect();
+        this.setCanvasSize();
+        window.addEventListener("resize", this.setCanvasSize.bind(this));
 
         this.ctx = this.canvas.getContext("2d");
 
@@ -189,16 +184,19 @@ class Game
 
     createHitbox(obj, func)
     {
+        let adjustedScale = Vector2.scale(Helpers.cssPerPx, obj.scale);
+        let adjustedPos = Vector2.scale(Helpers.cssPerPx, obj.position);
+
         let hb = document.createElement("div");
 
-        hb.style.width = obj.scale.x + "px";
-        hb.style.height = obj.scale.y + "px";
+        hb.style.width = adjustedScale.x + "px";
+        hb.style.height = adjustedScale.y + "px";
 
         hb.style.position = "absolute";
-        hb.style.left = obj.position.x + "px";
-        hb.style.top = obj.position.y + "px";
+        hb.style.left = adjustedPos.x + "px";
+        hb.style.top = adjustedPos.y + "px";
 
-        hb.style.borderRadius = Math.round(Math.max(obj.scale.x, obj.scale.y) / 2) + "px";
+        hb.style.borderRadius = Math.round(Math.max(adjustedScale.x, adjustedScale.y) / 2) + "px";
 
         hb.style.pointerEvents = "auto";
 
@@ -218,5 +216,19 @@ class Game
     {
         this.counter = value;
         this.scoreBoard.innerHTML = this.counter;
+    } 
+
+    /* Helper Methods */
+
+    setCanvasSize()
+    {
+        let size = Helpers.screenDimensions;
+        this.canvas.width = size.x;
+        this.canvas.height = size.y;
+
+        this.canvas.style.width = Helpers.pxToCss(this.canvas.width);
+        this.canvas.style.height = Helpers.pxToCss(this.canvas.height);
+
+        this.canvasBounds = this.canvas.getBoundingClientRect();
     }
 }
