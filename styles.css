@@ -23,30 +23,75 @@ body {
 }
 
 #gem {
+	position: relative;
+	left: 500px;
+	top: 200px;
 	margin-top: 10px;
 	height: 50px;
 	width: 50px;
-	filter: hue-rotate(145deg) brightness(80%) contrast(160%);
 }
 
 #scoreBoard {
+	position: relative;
+	left: 500px;
+	top: 190px;
 	margin-left: 10px;
 	color: white;
 	text-shadow: 3px 3px #3049b8;
 	font-family: "Grobold";
-	font-size: 42px;
+	font-size: 50px;
 }
 
 #evolvebutton {
-	color:black;
+	background-color: #4be7ff;
+	border: solid;
+	border-color: #3690f7;
+	border-width: 2 3px;
+    color: white;
+	padding: 15px 32px;
+	font-family: "Grobold";
+	text-shadow: 1px 1px #3049b8;
+	font-weight: bold; 
+	text-align: center;
 	text-decoration: none;
+	padding-top: 8px;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+	cursor: pointer;
 	border-radius: 25px;
+	height: 45px;
+	width: 225px;
+}
+
+#evolvebutton:hover {
+	box-shadow: 0 9px 12px 0 rgba(0,0,0,0.24), 0 12px 30px 0 rgba(0,0,0,0.19);
 }
 
 #upgradememes {
-	color:black;
+	background-color: #4be7ff;
+	border: solid;
+	border-color: #3690f7;
+	border-width: 2 3px;
+    color: white;
+	padding: 15px 32px;
+	font-family: "Grobold";
+	text-shadow: 1px 1px #3049b8;
+	font-weight: bold; 
+	text-align: center;
 	text-decoration: none;
+	padding-top: 8px;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+	cursor: pointer;
 	border-radius: 25px;
+	height: 45px;
+	width: 225px;
+}
+
+#upgradememes:hover {
+	box-shadow: 0 9px 12px 0 rgba(0,0,0,0.24), 0 12px 30px 0 rgba(0,0,0,0.19);
 }
 
 #wrapper {
