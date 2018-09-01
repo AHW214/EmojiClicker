@@ -10,16 +10,41 @@ body {
 	min-height: 100%;	
 	background-repeat: no-repeat;
 	background-attachment: fixed;
-	background-image: -moz-linear-gradient(to bottom right, #4be7ff, #4b6cff);	
+	background-image: linear-gradient(to bottom right, #4be7ff, #4b6cff);	
 	overflow: hidden;
 }
 
-#title {
+h1 {
 	color: white;
 	text-shadow: 5px 5px #3049b8;
-	font-size: 48px;
 	font-family: "Grobold";
 	text-align: center;
+}
+
+div.sidebar {
+	width: 600px;
+}
+
+div.sidebar button {
+	display: inline-block;
+	margin: 12px;
+	background-color: aliceblue;
+	border: 3px solid royalblue;
+	border-radius: 15px;
+	color: royalblue;
+	font-size: 22px;
+	font-family: "Grobold";		
+	width: 274px;
+	height: 45px;
+}
+
+div.sidebar button:hover {
+	background-color: rgb(74, 255, 144);
+	color: rgb(32, 114, 82);
+}
+
+#title {
+	font-size: 48px;	
 }
 
 #gem {
@@ -40,58 +65,6 @@ body {
 	text-shadow: 3px 3px #3049b8;
 	font-family: "Grobold";
 	font-size: 50px;
-}
-
-#evolvebutton {
-	background-color: #4be7ff;
-	border: solid;
-	border-color: #3690f7;
-	border-width: 2 3px;
-    color: white;
-	padding: 15px 32px;
-	font-family: "Grobold";
-	text-shadow: 1px 1px #3049b8;
-	font-weight: bold; 
-	text-align: center;
-	text-decoration: none;
-	padding-top: 8px;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-	cursor: pointer;
-	border-radius: 25px;
-	height: 45px;
-	width: 225px;
-}
-
-#evolvebutton:hover {
-	box-shadow: 0 9px 12px 0 rgba(0,0,0,0.24), 0 12px 30px 0 rgba(0,0,0,0.19);
-}
-
-#upgradememes {
-	background-color: #4be7ff;
-	border: solid;
-	border-color: #3690f7;
-	border-width: 2 3px;
-    color: white;
-	padding: 15px 32px;
-	font-family: "Grobold";
-	text-shadow: 1px 1px #3049b8;
-	font-weight: bold; 
-	text-align: center;
-	text-decoration: none;
-	padding-top: 8px;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-	cursor: pointer;
-	border-radius: 25px;
-	height: 45px;
-	width: 225px;
-}
-
-#upgradememes:hover {
-	box-shadow: 0 9px 12px 0 rgba(0,0,0,0.24), 0 12px 30px 0 rgba(0,0,0,0.19);
 }
 
 #wrapper {

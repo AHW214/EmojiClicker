@@ -38,7 +38,7 @@ async function run()
         firstUpgrade = true;
         sickwubs.play();
 
-        document.body.removeChild(loss);
+        loss.remove();
     });
 
     var evolve = document.getElementById("evolvebutton");
@@ -52,6 +52,6 @@ async function run()
         firstEmoji.image.src = "src/images/emoji/sun.png";
         particleimage = "src/images/emoji/alien.png";
         secondUpgrade = true;
-        document.body.removeChild(evolve);
+        evolve.remove();
     });
 }
