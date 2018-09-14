@@ -1,6 +1,12 @@
+var game;
+var upgradeHeader;
+var buttons = [];
+
+window.onload = run;
+
 async function run() 
 {
-    var game = new Game();
+    game = new Game();
 
     let particleimage = "src/images/emoji/cheese.png";
     
@@ -9,49 +15,72 @@ async function run()
     let emojiPos = Vector2.diff(Vector2.scale(0.5, screenSize), Vector2.scale(0.5, emojiSize));
 
     let firstEmoji = await game.makeEmoji("src/images/emoji/moon.png", emojiSize.x, emojiSize.y, emojiPos.x, emojiPos.y, (pos) => {
-        console.log(`x pos: ${pos.x}\ny pos: ${pos.y}`); 
-        console.log(firstUpgrade);
-        
-        if(secondUpgrade)
-            game.score += 5;
-        else if(firstUpgrade)
-            game.score += 2;
-        else 
-            game.score += 1;
-
+        game.score += value;
         game.makeParticle(particleimage, 64, 64, pos.x, pos.y, 0.5, -0.5);
-
     });
-    
-    var sickwubs = document.getElementById("sickwubs");
-    var firstUpgrade = false;
-    var secondUpgrade = false;
 
-    var loss = document.getElementById("upgradememes");
-    loss.addEventListener("click", () => {
-        if(game.score < 20) {
-            console.log("you dont got the dosh");
+    let buttonBar = document.getElementById("button-bar");
+    upgradeHeader = buttonBar.querySelector("h1");
+
+    for(let i = 0; i < 6; i++) {
+        let button = document.createElement("button");
+        let upgrade = upgrades.splice(0, 1)[0];
+
+        setButtonUpgrade(button, upgrade);
+        
+        buttons.push(button);
+        buttonBar.appendChild(button);
+    }
+}
+
+function setButtonUpgrade(button, upgrade)
+{
+    button.innerHTML = `${upgrade.name} ($${upgrade.cost})`;
+
+    button.onclick = function() {
+        if(game.score < upgrade.cost)
             return;
-        }
 
-        game.score -= 20;
-        firstUpgrade = true;
-        sickwubs.play();
+        game.score -= upgrade.cost;
+        upgrade.action();
 
-        loss.remove();
-    });
+        removeButton(this);
+    };
 
-    var evolve = document.getElementById("evolvebutton");
-    evolve.addEventListener("click", () => {
-        if(game.score < 50) {
-            console.log("cease and desist");
-            return;
-        } 
+    button.onmouseenter = function() {
+        if(game.score < upgrade.cost)
+            this.classList.add("insufficient");
+    };
 
-        game.score -= 50;
-        firstEmoji.image.src = "src/images/emoji/sun.png";
-        particleimage = "src/images/emoji/alien.png";
-        secondUpgrade = true;
-        evolve.remove();
-    });
+    button.onmouseleave = function() {
+        this.classList.remove("insufficient");
+    };
+}
+
+function removeButton(toRemove)
+{
+    for(let i = buttons.indexOf(toRemove); i < buttons.length - 1; i++) {
+        let current = buttons[i];
+        let next = buttons[i + 1];
+
+        current.innerHTML = next.innerHTML;
+        current.onclick = next.onclick;
+        current.onmouseenter = next.onmouseenter;
+        current.onmouseleave = next.onmouseleave;
+    }
+
+    let lastIndex = buttons.length - 1; 
+
+    if(upgrades.length === 0) {
+        buttons.splice(lastIndex, 1)[0].remove();
+
+        if(buttons.length === 0)
+            upgradeHeader.innerHTML = "Outta Upgrades...";
+
+        return;
+    }
+        
+    let last = buttons[lastIndex];
+    let upgrade = upgrades.splice(0, 1)[0];  
+    setButtonUpgrade(last, upgrade); 
 }

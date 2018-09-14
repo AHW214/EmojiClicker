@@ -43,6 +43,11 @@ div.sidebar button:hover {
 	color: rgb(32, 114, 82);
 }
 
+div.sidebar button.insufficient:hover  {
+	background-color: rgb(255, 74, 74);
+	color: rgb(114, 32, 32);
+}
+
 #title {
 	font-size: 48px;	
 }

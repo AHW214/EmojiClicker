@@ -1,28 +1,26 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">      
-        <script type="text/javascript" src="classes/helpers.js"></script> 
-        <script type="text/javascript" src="classes/vector2.js"></script>        
-        <script type="text/javascript" src="classes/gameobject.js"></script>
-        <script type="text/javascript" src="classes/physicsobject.js"></script>
-        <script type="text/javascript" src="classes/particle.js"></script>
-        <script type="text/javascript" src="classes/game.js"></script>     
+        <meta charset="utf-8">
+        <script type="text/javascript" src="scripts/upgrades.js"></script>
+        <script type="text/javascript" src="scripts/classes/helpers.js"></script> 
+        <script type="text/javascript" src="scripts/classes/vector2.js"></script>        
+        <script type="text/javascript" src="scripts/classes/gameobject.js"></script>
+        <script type="text/javascript" src="scripts/classes/physicsobject.js"></script>
+        <script type="text/javascript" src="scripts/classes/particle.js"></script>
+        <script type="text/javascript" src="scripts/classes/game.js"></script>     
         <script type="text/javascript" src="main.js"></script>
         <link rel="stylesheet" href="styles.css">
         <title>Emoji Clicker</title>
     </head>
-    <body onload="run()">
+    <body>
         <h1 id="title">Emoji Clicker</h1>
         <audio id="sickwubs">
-            <source src="sandbox\audio\Danny McCarthy - Silver Scrapes.mp3" type="audio/mpeg">
+            <source src="sandbox/audio/Danny McCarthy - Silver Scrapes.mp3" type="audio/mpeg">
         </audio>
         <a id="sandbox" href="sandbox/sandbox.html">Sandbox</a>
-        <div class="sidebar">
+        <div id="button-bar" class="sidebar">
             <h1>Upgrades</h1>
-            <button id="evolvebutton">Evolve Emoji ($50)</button>
-            <button id="upgradememes" style="font-size:18px">Upgrade Emoji ($20)</button>
-            <button id="testbutton">Test Button</button>
         </div>    
         <img id="gem" src="src/images/emoji/gemborder.png"><span id="scoreBoard">0</span>
         <div id="wrapper">
